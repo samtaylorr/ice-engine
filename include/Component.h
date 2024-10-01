@@ -1,5 +1,8 @@
-#include "utils/Messages.h"
+#include <Messages.h>
 #include <list>
+
+#ifndef COMPONENT_H_
+#define COMPONENT_H_
 
 class Scene;
 
@@ -30,3 +33,5 @@ class Scene {
   MESSAGES message_; 
   static int static_number_;
 };
+
+#endif
