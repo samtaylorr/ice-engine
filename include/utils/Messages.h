@@ -1,0 +1,4 @@
+enum MESSAGES {
+  SCENE_START,
+  SCENE_UPDATE
+};
