@@ -5,9 +5,8 @@
 #include <stdio.h>
 #include <string>
 
-//Headers
-#include "LTexture.h"
-#include "Component.h"
+//Our ICE library
+#include <ice/ice.h>>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
