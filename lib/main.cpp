@@ -6,7 +6,7 @@
 #include <string>
 
 //Our ICE library
-#include <ice/ice.h>>
+#include <ice/ice.h>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
