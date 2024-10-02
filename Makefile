@@ -27,5 +27,11 @@ OBJ_NAME = mygame
 #This is the target that compiles our executable
 all	:	$(OBJS)
 	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+	./$(OBJ_NAME)
+
+debug :	$(OBJS)
+	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -g
+	gdb ./a.out
+	run
 	
 #run make all in the same directory as this Makefile
