@@ -5,3 +5,4 @@
 #include "LWindow.h"
 #include "LTexture.h"
 #include "Component.h"
+#include "LFont.h"

@@ -1,9 +1,6 @@
 #include "Component.h"
 
-Component::Component(Scene &subject) : scene_(subject)
-{
-    this->Enable();
-}
+Component::Component(Scene &subject) : scene_(subject){this->Enable();};
 
 void Component::Disable() {
     this->scene_.Detach(this);

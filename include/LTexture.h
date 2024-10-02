@@ -2,16 +2,19 @@
 #include <SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_ttf.h>
+#include "Component.h"
+#include "LWindow.h"
 
 #ifndef LTEXTURE_H_
 #define LTEXTURE_H_
 
 //Texture wrapper class
-class LTexture
+class LTexture : public Component
 {
     public:
-        //Initializes in memory
-        LTexture();
+        //Allocates memory
+        LTexture(LWindow* window, Scene &subject, const std::string& fileName);
+        LTexture(LWindow* window, Scene &subject);
 
         //Deallocates memory
         ~LTexture();
@@ -20,9 +23,6 @@ class LTexture
 
         //Loads image at specified path
         bool loadFromFile( std::string path );
-
-        //Creates image from font string
-        bool loadFromRenderedText( std::string textureText, TTF_Font* font, SDL_Color textColor );
 
         //Deallocates texture
         void free();
@@ -49,7 +49,6 @@ class LTexture
         int getWidth();
         int getHeight();
 
-    private:
         //The actual hardware texture
         SDL_Texture* mTexture;
 
@@ -59,6 +58,7 @@ class LTexture
         //Image dimensions
         int mWidth;
         int mHeight;
+        std::string fileName;
 };
 
 #endif

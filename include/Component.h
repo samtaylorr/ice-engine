@@ -8,7 +8,7 @@ class Scene;
 
 class Component {
 public:
-    Component(Scene &subject); 
+    Component(Scene &subject);
     virtual void Start(){};
     virtual void Update(){};
     void RecieveMessage(const MESSAGES &enumerator);
