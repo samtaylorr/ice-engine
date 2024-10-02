@@ -57,8 +57,9 @@ void close()
     //Free global font
     TTF_CloseFont(gFont);
     gFont = NULL;
-
     delete window;
+    delete gTextTexture;
+    delete gSpriteSheetTexture;
 }
 
 int main( int argc, char* args[] )
