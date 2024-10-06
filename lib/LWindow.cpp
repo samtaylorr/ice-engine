@@ -36,6 +36,12 @@ void LWindow::Render()
 	SDL_RenderPresent( this->renderer );
 }
 
+void LWindow::Clear()
+{
+	SDL_SetRenderDrawColor( this->GetRenderer(), 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_RenderClear( this->GetRenderer() );
+}
+
 bool LWindow::IsInit()
 {
     return this->_isInit;

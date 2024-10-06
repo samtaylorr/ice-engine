@@ -76,18 +76,12 @@ int main( int argc, char* args[] )
         window->Render();
         
         //While application is running
-        while( !quit )
+        while( !Input::HasInitiatedQuit() )
         {
             //Clear screen
-            SDL_SetRenderDrawColor( window->GetRenderer(), 0xFF, 0xFF, 0xFF, 0xFF );
-            SDL_RenderClear( window->GetRenderer() );
+            window->Clear();
 
             Input::ProcessInput();
-
-            if(Input::GetKeyDown(SDLK_ESCAPE))
-            {
-                quit = true;
-            }
 
             //Update currentScene
             currentScene->CreateMessage(SCENE_UPDATE);
@@ -96,7 +90,7 @@ int main( int argc, char* args[] )
             gTextTexture->render(0,0);
 
             //Update screen
-            SDL_RenderPresent( window->GetRenderer() );
+            window->Render();
             Input::Clear();
         }
     }

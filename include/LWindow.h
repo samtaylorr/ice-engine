@@ -13,6 +13,7 @@ public:
     SDL_Window* GetWindow();
     SDL_Renderer* GetRenderer();
     void Render();
+    void Clear();
     bool IsInit();
 
 private:
