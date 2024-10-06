@@ -63,6 +63,9 @@
         "ios": "cpp",
         "locale": "cpp",
         "queue": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "__locale": "cpp",
+        "text_encoding": "cpp",
+        "chrono": "cpp"
     }
 }

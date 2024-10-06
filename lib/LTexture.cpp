@@ -44,7 +44,7 @@ void LTexture::setBlendMode( SDL_BlendMode blending )
     SDL_SetTextureBlendMode( mTexture, blending );
 }
         
-void LTexture::setAlpha( Uint8 alpha )
+void LTexture::setAlpha( Uint8 alpha )  
 {
     //Modulate texture alpha
     SDL_SetTextureAlphaMod( mTexture, alpha );

@@ -1,5 +1,8 @@
 #include "LTexture.h"
 
+#ifndef LFONT_H_
+#define LFONT_H_
+
 class LFont : public LTexture
 {
     public:
@@ -13,3 +16,5 @@ class LFont : public LTexture
     private:
         std::string fontName;
 };
+
+#endif
