@@ -49,3 +49,8 @@ bool LFont::loadFromRenderedText( std::string textureText, TTF_Font* font, SDL_C
     //Return success
     return mTexture != NULL;
 }
+
+void LFont::Update()
+{
+    render(0,0);
+}

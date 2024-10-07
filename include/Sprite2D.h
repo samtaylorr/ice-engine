@@ -21,14 +21,15 @@ private:
     static int _mult(int x, int i, int multiplier);
     
 public:
+    Sprite2D(LWindow* window, Scene &subject, SDL_Rect &area, SDL_Rect &mult, int &frames, const std::string& fileName);
     Sprite2D(LWindow* window, Scene &subject, const std::string& fileName);
     ~Sprite2D();
     void Start() override;
     void Update() override;
 
-    static SDL_Rect* GenerateClips(int frames, SDL_Rect origin, SDL_Rect mask, SDL_Rect mult)   
+    static SDL_Rect* GenerateClips(int frames, SDL_Rect origin, SDL_Rect mult)   
     {
-        SDL_Rect clips[frames];
+        SDL_Rect* clips = new SDL_Rect[frames];
 
         for(int i=0; i<frames; i++)
         {

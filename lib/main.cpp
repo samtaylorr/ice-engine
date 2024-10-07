@@ -85,9 +85,6 @@ int main( int argc, char* args[] )
 
             //Update currentScene
             currentScene->CreateMessage(SCENE_UPDATE);
-            
-            //Render text
-            gTextTexture->render(0,0);
 
             //Update screen
             window->Render();

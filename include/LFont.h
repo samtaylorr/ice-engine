@@ -13,6 +13,8 @@ class LFont : public LTexture
         //Creates image from font string
         bool loadFromRenderedText( std::string textureText, TTF_Font* font, SDL_Color textColor );
 
+        void Update() override;
+
     private:
         std::string fontName;
 };
