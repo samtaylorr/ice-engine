@@ -109,6 +109,22 @@ void LTexture::render( int x, int y )
     SDL_RenderCopy( mRenderer, mTexture, NULL, &renderQuad );
 }
 
+void LTexture::render(int x, int y, SDL_Rect *clip)
+{
+    //Set rendering space and render to screen
+    SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+
+    //Set clip rendering dimensions
+    if( clip != NULL )
+    {
+        renderQuad.w = clip->w;
+        renderQuad.h = clip->h;
+    }
+
+    //Render to screen
+    SDL_RenderCopy( mRenderer, mTexture, clip, &renderQuad );
+}
+
 void LTexture::render(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE )
 {
     //Set rendering space and render to screen

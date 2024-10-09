@@ -1,6 +1,7 @@
 #include "AnimatedSprite2D.hpp"
 #include <fstream>
 #include <iostream>
+#include <Settings.hpp>
 
 void AnimatedSprite2D::AddFrames(json &frame, std::vector<SDL_Rect>* v)
 {
@@ -34,8 +35,34 @@ SpriteData *AnimatedSprite2D::GenerateSpriteData(LWindow *window, Scene &subject
     return spriteData;
 }
 
-AnimatedSprite2D::AnimatedSprite2D(LWindow *window, Scene &subject, const std::string &filePath, const std::string &jsonPath) : 
-Sprite2D(subject, GenerateSpriteData(window, subject, filePath, jsonPath)){}
+void AnimatedSprite2D::Update()
+{
+    currentClip = &spriteData->clips[frame];
+    spriteData->spriteSheet->render( ( Settings::SCREEN_WIDTH - currentClip->w ) / 2, ( Settings::SCREEN_HEIGHT - currentClip->h ) / 2, currentClip );
+    if(currentDuration >= duration)
+    {
+        //Go to next frame
+        ++frame;
+        //Cycle animation
+        if( frame >= frameEnd )
+        {
+            frame = frameStart;
+        }
+        currentDuration = 0;
+    }
+    else { ++currentDuration; }
+}
+
+AnimatedSprite2D::AnimatedSprite2D(LWindow *window, Scene &subject, const std::string &filePath, const std::string &jsonPath) : Component(subject)
+{
+    spriteData = GenerateSpriteData(window, subject, filePath, jsonPath);
+    frameEnd = spriteData->frames;
+}
+
+void AnimatedSprite2D::Play(Animation *animation)
+{
+    this->currentAnimation = animation;
+}
 
 AnimatedSprite2D::~AnimatedSprite2D()
 {
