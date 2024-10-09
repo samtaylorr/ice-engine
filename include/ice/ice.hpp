@@ -14,4 +14,4 @@
 
 // Feature headers
 #include "Sprite2D.hpp"
-#include "AseSprite2D.hpp"
+#include "AnimatedSprite2D.hpp"

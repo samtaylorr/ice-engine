@@ -11,6 +11,11 @@ LFont::LFont(LWindow *window, Scene &subject, std::string textureText, TTF_Font*
     this->loadFromRenderedText(textureText, font, textColor);
 }
 
+void LFont::SetTransform(SDL_Point transform)
+{
+    this->transform = transform;
+}
+
 LFont::~LFont()
 {
     free();
@@ -52,5 +57,5 @@ bool LFont::loadFromRenderedText( std::string textureText, TTF_Font* font, SDL_C
 
 void LFont::Update()
 {
-    render(0,0);
+    render(transform.x,transform.y);
 }

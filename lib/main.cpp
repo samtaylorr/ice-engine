@@ -9,8 +9,8 @@
 #include <ice/ice.hpp>
 
 // Define settings for compiler
-const int Settings::SCREEN_WIDTH = 640;
-const int Settings::SCREEN_HEIGHT = 480;
+const int Settings::SCREEN_WIDTH = 1280;
+const int Settings::SCREEN_HEIGHT = 720;
 
 //Loads media
 bool loadMedia();
@@ -21,14 +21,13 @@ void close();
 LWindow* window = new LWindow(Settings::SCREEN_WIDTH, Settings::SCREEN_HEIGHT);
 
 //Walking animation
-const int WALKING_ANIMATION_FRAMES = 4;
-Sprite2D* gSpriteSheetTexture = NULL;
+AnimatedSprite2D* player = NULL;
 
 //Globally used font
-TTF_Font* gFont = TTF_OpenFont( "fonts/easvhs.ttf", 28 );
+TTF_Font* gFont = TTF_OpenFont( "fonts/easvhs.ttf", 14 );
 
 //Rendered texture
-LFont* gTextTexture = NULL;
+LFont* testText = NULL;
 
 Scene* currentScene;
 
@@ -36,8 +35,9 @@ bool loadMedia()
 {
     //Loading success flag
     bool success = true;
-    gTextTexture = new LFont(window, *currentScene, "test", gFont, {0,0,0,0});
-    gSpriteSheetTexture = new AseSprite2D(window, *currentScene, "img/main_character_sprite.png", "img/main_character_sprite.json");
+    testText = new LFont(window, *currentScene, "predev", gFont, {0,0,0,0});
+    testText->SetTransform({5,0});
+    player = new AnimatedSprite2D(window, *currentScene, "img/main_character_sprite.png", "img/main_character_sprite.json");
     return success;
 }
 
@@ -47,8 +47,8 @@ void close()
     TTF_CloseFont(gFont);
     gFont = NULL;
     delete window;
-    delete gTextTexture;
-    delete gSpriteSheetTexture;
+    delete testText;
+    delete player;
 }
 
 int main( int argc, char* args[] )
