@@ -2,8 +2,8 @@
 #include <SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_ttf.h>
-#include "Component.h"
-#include "LWindow.h"
+#include "Component.hpp"
+#include "LWindow.hpp"
 
 #ifndef LTEXTURE_H_
 #define LTEXTURE_H_

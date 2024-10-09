@@ -1,4 +1,4 @@
-#include "Component.h"
+#include "Component.hpp"
 
 void Scene::Attach(Component *observer) 
 {

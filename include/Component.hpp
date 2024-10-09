@@ -1,4 +1,4 @@
-#include <Messages.h>
+#include <Messages.hpp>
 #include <list>
 
 #ifndef COMPONENT_H_

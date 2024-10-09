@@ -6,7 +6,7 @@
 #include <string>
 
 //Our ICE library
-#include <ice/ice.h>
+#include <ice/ice.hpp>
 
 // Define settings for compiler
 const int Settings::SCREEN_WIDTH = 640;
@@ -22,8 +22,6 @@ LWindow* window = new LWindow(Settings::SCREEN_WIDTH, Settings::SCREEN_HEIGHT);
 
 //Walking animation
 const int WALKING_ANIMATION_FRAMES = 4;
-SDL_Rect gSpriteClips[WALKING_ANIMATION_FRAMES];
-
 Sprite2D* gSpriteSheetTexture = NULL;
 
 //Globally used font
@@ -39,10 +37,9 @@ bool loadMedia()
     //Loading success flag
     bool success = true;
     gTextTexture = new LFont(window, *currentScene, "test", gFont, {0,0,0,0});
-    gSpriteSheetTexture = new Sprite2D(window, *currentScene, "img/foo.png");
+    gSpriteSheetTexture = new AseSprite2D(window, *currentScene, "img/main_character_sprite.png", "img/main_character_sprite.json");
     return success;
 }
-
 
 void close()
 {

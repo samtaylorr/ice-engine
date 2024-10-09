@@ -1,6 +1,6 @@
-#include <Sprite2D.h>
-#include <Settings.h>
-#include <Input.h>
+#include <Sprite2D.hpp>
+#include <Settings.hpp>
+#include <Input.hpp>
 #include <iostream>
 
 // if mult > 0, multiply by origin.x*(i*mult.x)
@@ -17,8 +17,18 @@ Sprite2D::Sprite2D(LWindow *window, Scene &subject, SDL_Rect &area, SDL_Rect &mu
 Sprite2D::Sprite2D(LWindow *window, Scene &subject, const std::string &fileName) : Component(subject)
 {
     spriteSheet = new LTexture(window, subject, fileName);
-    this->frames = 4;
-    clips = Sprite2D::GenerateClips(4, {0,0,64,205}, {64,0,0,0});
+    this->frames = 2;
+    clips = new SDL_Rect[16];
+    clips[0] = {0,0,512,928};
+    clips[1] = {517,0,512,928};
+    //clips = Sprite2D::GenerateClips(4, {0,0,64,205}, {64,0,0,0});
+}
+
+Sprite2D::Sprite2D(Scene &subject, SpriteData* spriteData) : Component(subject)
+{
+    this->spriteSheet = spriteData->spriteSheet;
+    this->frames = spriteData->frames;
+    this->clips = spriteData->clips;
 }
 
 Sprite2D::~Sprite2D()
@@ -28,8 +38,7 @@ Sprite2D::~Sprite2D()
 }
 
 void Sprite2D::Start()
-{
-}
+{}
 
 void Sprite2D::Update()
 {
@@ -54,16 +63,27 @@ void Sprite2D::Update()
         flipType = SDL_FLIP_VERTICAL;
     }
 
-    currentClip = &clips[ frame / frames ];
+    currentClip = &clips[frame];
 
-    spriteSheet->render( ( Settings::SCREEN_WIDTH - currentClip->w ) / 2, ( Settings::SCREEN_HEIGHT - currentClip->h ) / 2, currentClip, degrees, NULL, flipType );
+    spriteSheet->render( ( Settings::SCREEN_WIDTH - currentClip->w ) / 4, ( Settings::SCREEN_HEIGHT - currentClip->h ) / 4, currentClip, degrees, NULL, flipType );
 
-    //Go to next frame
-    ++frame;
-
-    //Cycle animation
-    if( frame / 4 >= frames )
+    if(currentDuration >= duration)
     {
-        frame = 0;
+        //Go to next frame
+        ++frame;
+
+        //Cycle animation
+        if( frame >= frames )
+        {
+            frame = 0;
+        }
+
+        currentDuration = 0;
     }
+    else
+    {
+        ++currentDuration;
+    }
+
+    
 }

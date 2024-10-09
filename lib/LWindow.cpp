@@ -1,4 +1,4 @@
-#include <LWindow.h>
+#include <LWindow.hpp>
 
 LWindow::LWindow(const int &SCREEN_WIDTH, const int &SCREEN_HEIGHT)
 {

@@ -1,4 +1,4 @@
-#include "LFont.h"
+#include "LFont.hpp"
 
 LFont::LFont(LWindow *window, Scene &subject, std::string textureText, TTF_Font* font, SDL_Color textColor) : LTexture(window, subject)
 {

@@ -1,4 +1,4 @@
-#include "LTexture.h"
+#include "LTexture.hpp"
 
 #ifndef LFONT_H_
 #define LFONT_H_
