@@ -5,42 +5,22 @@
 
 void PlayerController::Update()
 {
-    moving = (Input::GetKeyDown(SDLK_a) || Input::GetKeyDown(SDLK_d));
+    std::unique_ptr<SDL_Point> lastPosition = std::make_unique<SDL_Point>(*position);
+    Move();
 
-    if(moving && !movingAnim)
+    if      (lastPosition->y < position->y) { *currentAnimation=*frontWalk;                     }
+    else if (lastPosition->y > position->y) { *currentAnimation=*backWalk;                      }
+    else if (lastPosition->x > position->x ){ *currentAnimation=*sideWalk; isFaceLeft = true;   }
+    else if (lastPosition->x < position->x) { *currentAnimation=*sideWalk; isFaceLeft = false;  }
+    else if (lastPosition->x == position->x && lastPosition->y == position->y)
     {
-        if(vDirection == FACE_BACK){ sprite->SetAnim(*backWalk);  }
-        else                      { sprite->SetAnim(*frontWalk); }
-        movingAnim = true;
-    }
-
-    if(Input::GetKeyDown(SDLK_s) && !movingAnim)
-    {
-        sprite->SetAnim(*frontWalk);
-        vDirection = FACE_FRONT;
-        movingAnim = true;
-    }
-    
-    if(Input::GetKeyDown(SDLK_w) && !movingAnim)
-    {
-        sprite->SetAnim(*backWalk);
-        vDirection = FACE_BACK;
-        movingAnim = true;
-    }
-
-    if(!Input::GetKeyDown(SDLK_s) && 
-       !Input::GetKeyDown(SDLK_w) && 
-       !Input::GetKeyDown(SDLK_a) && 
-       !Input::GetKeyDown(SDLK_d) && movingAnim != false)
-    {
-        if(vDirection == FACE_BACK){ sprite->SetAnim(*backIdle);  }
-        else                      { sprite->SetAnim(*frontIdle); }
-        movingAnim = false;
+        if     (currentAnimation->name=="Front_Walk")  { *currentAnimation=*frontIdle;}
+        else if(currentAnimation->name=="Back_Walk")   { *currentAnimation=*backIdle; }
+        else if(currentAnimation->name=="Side_Walk")   { *currentAnimation=*sideIdle; }
     }
 
     sprite->SetDirection(isFaceLeft);
-
-    Move();
+    sprite->SetAnim(*currentAnimation);
     
     return;
 }
@@ -73,12 +53,14 @@ void PlayerController::Move()
 PlayerController::PlayerController(Scene &subject, std::shared_ptr<AnimatedSprite2D> sprite) : Component(subject)
 {
     this->sprite = sprite;
-    this->frontIdle = std::make_unique<Animation>(2,2, 10);        // Set the idle frames and duration
-    this->frontWalk = std::make_unique<Animation>(0,2, 10);        // Set the walk frames and duration
-    this->backIdle =  std::make_unique<Animation>(3,3, 10);        // Set the idle frames and duration for the back
-    this->backWalk =  std::make_unique<Animation>(4,6, 10);        // Set the walk frames and duration for the back
-
+    this->frontIdle = std::make_unique<Animation>("Front_Idle", 2,2, 10);        // Set the idle frames and duration
+    this->frontWalk = std::make_unique<Animation>("Front_Walk", 0,2, 10);        // Set the walk frames and duration
+    this->backIdle =  std::make_unique<Animation>("Back_Idle", 3,3, 10);        // Set the idle frames and duration for the back
+    this->backWalk =  std::make_unique<Animation>("Back_Walk", 4,6, 10);        // Set the walk frames and duration for the back
+    this->sideWalk =  std::make_unique<Animation>("Side_Walk", 6,8, 10);        // Set the walk frames and duration for the side
+    this->sideIdle =  std::make_unique<Animation>("Side_Idle", 7,7, 10);        // Set the idle frames and duration for the side
     this->position = std::make_unique<SDL_Point>(SDL_Point{0,0});  // Set the position
+    this->currentAnimation = std::make_unique<Animation>(*frontIdle);
 }
 
 PlayerController::~PlayerController()

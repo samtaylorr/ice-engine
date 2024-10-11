@@ -38,7 +38,6 @@ SpriteData *AnimatedSprite2D::GenerateSpriteData(LWindow *window, Scene &subject
 void AnimatedSprite2D::Update()
 {
     currentClip = &spriteData->clips[frame];
-    //spriteData->spriteSheet->render( ( Settings::SCREEN_WIDTH - currentClip->w ) / 2, ( Settings::SCREEN_HEIGHT - currentClip->h ) / 2, currentClip );
     spriteData->spriteSheet->render( position->x, position->y, currentClip, 0.0, NULL, flipType );
     if(currentDuration >= duration)
     {
@@ -65,6 +64,11 @@ AnimatedSprite2D::AnimatedSprite2D(Scene &subject) : Component(subject){}
 
 void AnimatedSprite2D::SetAnim(Animation anim)
 {
+    if(frameStart == anim.frameStart && frameEnd == anim.frameEnd)
+    {
+        return;
+    }
+
     frame = anim.frameStart;
     frameStart = anim.frameStart;
     frameEnd = anim.frameEnd;

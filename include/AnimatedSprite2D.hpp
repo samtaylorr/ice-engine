@@ -23,9 +23,7 @@ private:
 public:
     AnimatedSprite2D(Scene &subject);
     AnimatedSprite2D(LWindow *window, Scene &subject, const std::string &filePath, const std::string &jsonPath);
-    void SetAnim(Animation anim);
-    void SetPosition(int x, int y);
-    void SetDirection(bool faceLeft);
+    void SetAnim(Animation anim), SetPosition(int x, int y), SetDirection(bool faceLeft);
     SDL_Rect* GetCurrentFrame();
 };
 

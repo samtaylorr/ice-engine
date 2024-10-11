@@ -10,6 +10,8 @@ enum V_DIRECTIONS
 {
     FACE_FRONT,
     FACE_BACK,
+    SIDE_LEFT,
+    SIDE_RIGHT,
     IDLE
 };
 
@@ -17,7 +19,7 @@ class PlayerController : public Component
 {
 private:
     int mPosX, mPosY, mVelX, mVelY;
-    std::unique_ptr<Animation> frontIdle, frontWalk, backIdle, backWalk;
+    std::unique_ptr<Animation> frontIdle, frontWalk, backIdle, backWalk, sideWalk, sideIdle, currentAnimation;
     std::shared_ptr<AnimatedSprite2D> sprite;
     std::unique_ptr<SDL_Point> position;
     V_DIRECTIONS vDirection;
@@ -25,7 +27,7 @@ private:
     void Update() override;
 public:
     //Maximum axis velocity of the dot
-    static const int VELOCITY = 10;
+    static const int VELOCITY = 3;
     PlayerController(Scene &subject, std::shared_ptr<AnimatedSprite2D> sprite);
     ~PlayerController();
     void Move();
