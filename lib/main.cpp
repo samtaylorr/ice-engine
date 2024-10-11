@@ -19,25 +19,21 @@ bool loadMedia();
 void close();
 
 LWindow* window = new LWindow(Settings::SCREEN_WIDTH, Settings::SCREEN_HEIGHT);
-
-//Walking animation
-AnimatedSprite2D* player = NULL;
+Scene currentScene;
 
 //Globally used font
 TTF_Font* gFont = TTF_OpenFont( "fonts/easvhs.ttf", 14 );
-
 //Rendered texture
-LFont* testText = NULL;
+LFont testText = LFont(window, currentScene, "predev", gFont, {0,0,0,0});
 
-Scene* currentScene;
+std::shared_ptr<AnimatedSprite2D> animSprite = std::make_unique<AnimatedSprite2D>(window, currentScene, "img/main_character_sprite.png", "img/main_character_sprite.json");
+PlayerController player = PlayerController(currentScene, animSprite);
 
 bool loadMedia()
 {
     //Loading success flag
     bool success = true;
-    testText = new LFont(window, *currentScene, "predev", gFont, {0,0,0,0});
-    testText->SetTransform({5,0});
-    player = new AnimatedSprite2D(window, *currentScene, "img/main_character_sprite.png", "img/main_character_sprite.json");
+    testText.SetTransform({5,0});
     return success;
 }
 
@@ -45,16 +41,12 @@ void close()
 {
     //Free global font
     TTF_CloseFont(gFont);
-    gFont = NULL;
     delete window;
-    delete testText;
-    delete player;
 }
 
 int main( int argc, char* args[] )
 {
-    currentScene = new Scene();
-    currentScene->CreateMessage(SCENE_START);
+    currentScene.CreateMessage(SCENE_START);
 
     //Load media
     if( !loadMedia() )
@@ -65,27 +57,23 @@ int main( int argc, char* args[] )
     {	
         //Main loop flag
         bool quit = false;
-
-        //Event handler
-        SDL_Event e;
-
-        //Update screen
-        window->Render();
-        
         //While application is running
+        double t = 0.0;
+        double dt = 1.0 / 60.0;
+        
         while( !Input::HasInitiatedQuit() )
         {
             //Clear screen
             window->Clear();
 
             Input::ProcessInput();
+            t += dt;
 
             //Update currentScene
-            currentScene->CreateMessage(SCENE_UPDATE);
+            currentScene.CreateMessage(SCENE_UPDATE);
 
             //Update screen
             window->Render();
-            Input::Clear();
         }
     }
 

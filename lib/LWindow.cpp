@@ -38,7 +38,7 @@ void LWindow::Render()
 
 void LWindow::Clear()
 {
-	SDL_SetRenderDrawColor( this->GetRenderer(), 0xFF, 0xFF, 0xFF, 0xFF );
+	SDL_SetRenderDrawColor( this->GetRenderer(), 0xBB, 0xBB, 0xBB, 0xBB );
     SDL_RenderClear( this->GetRenderer() );
 }
 
@@ -105,7 +105,7 @@ bool LWindow::Init()
 			else
 			{
 				//Initialize renderer color
-				SDL_SetRenderDrawColor( this->renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+				SDL_SetRenderDrawColor( this->renderer, 0xBB, 0xBB, 0xBB, 0xBB );
 
                 //Load SDL Extensions
                 success = LoadSDLExtensions();

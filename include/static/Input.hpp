@@ -1,5 +1,5 @@
 #include <SDL2/SDL.h>
-#include <vector>
+#include <map>
 #include <iostream>
 #include <algorithm>
 
@@ -9,31 +9,30 @@
 class Input
 {
 private:
-    static std::vector<int> keys_down, keys;
+    static std::map<int, bool> keyboard;
     static bool quit;
 public:
     static void ProcessInput();
     static bool GetKeyDown(SDL_Keycode key);
-    static bool GetKey(SDL_Keycode key);
-    static void Clear();
     static bool HasInitiatedQuit();
 };
 
 inline void Input::ProcessInput()
 {
     SDL_Event e;
-    Input::Clear();
 
     while( SDL_PollEvent( &e ) != 0 )
     {
-        if (e.type == SDL_KEYDOWN)
+        switch(e.type)
         {
-            Input::keys_down.push_back(e.key.keysym.sym);
+            case SDL_KEYDOWN:
+                keyboard[e.key.keysym.sym] = true;
+                break;
+            case SDL_KEYUP:
+                keyboard[e.key.keysym.sym] = false;
+                break;
         }
-        else
-        {
-            Input::keys.push_back(e.key.keysym.sym);
-        }
+
         //User requests quit
         if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE )
         {
@@ -42,28 +41,10 @@ inline void Input::ProcessInput()
     }
 }
 
-inline bool Input::GetKey(SDL_Keycode key)
-{
-    if(std::find(Input::keys.begin(), Input::keys.end(), key)!=Input::keys.end()){
-      return key;
-    }
-    
-    return false;
-}
-
 inline bool Input::GetKeyDown(SDL_Keycode key)
 {
-    if(std::find(Input::keys_down.begin(), Input::keys_down.end(), key)!=Input::keys_down.end()){
-      return key;
-    }
+    return keyboard[key];
     
-    return false;
-}
-
-inline void Input::Clear()
-{
-    Input::keys_down.clear();
-    Input::keys.clear();
 }
 
 inline bool Input::HasInitiatedQuit()

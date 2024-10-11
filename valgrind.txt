@@ -1,0 +1,57 @@
+==182522== Memcheck, a memory error detector
+==182522== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==182522== Using Valgrind-3.23.0 and LibVEX; rerun with -h for copyright info
+==182522== Command: ./mygame
+==182522== Parent PID: 161699
+==182522== 
+==182522== Conditional jump or move depends on uninitialised value(s)
+==182522==    at 0x4229EF: Input::ProcessInput() (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x422471: main (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==  Uninitialised value was created by a stack allocation
+==182522==    at 0x49CD3B0: SDL_SendEditingText.part.0.isra.0 (SDL_keyboard.c:1072)
+==182522== 
+==182522== Invalid read of size 8
+==182522==    at 0x48D83B0: SDL_DestroyTexture_REAL (SDL_render.c:4283)
+==182522==    by 0x421EEC: LTexture::free() (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x421A11: LFont::~LFont() (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x4E50460: __run_exit_handlers (exit.c:108)
+==182522==    by 0x4E5052D: exit (exit.c:138)
+==182522==    by 0x4E3724E: (below main) (libc_start_call_main.h:74)
+==182522==  Address 0x137bf360 is 0 bytes inside a block of size 144 free'd
+==182522==    at 0x4847B83: free (vg_replace_malloc.c:989)
+==182522==    by 0x48D830E: UnknownInlinedFun (SDL_malloc.c:5339)
+==182522==    by 0x48D830E: SDL_DestroyTexture_REAL.part.0 (SDL_render.c:4318)
+==182522==    by 0x48D84F2: UnknownInlinedFun (SDL_render.c:4283)
+==182522==    by 0x48D84F2: UnknownInlinedFun (SDL_render.c:4352)
+==182522==    by 0x48D84F2: SDL_DestroyRenderer_REAL (SDL_render.c:4321)
+==182522==    by 0x422113: LWindow::~LWindow() (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x42240D: close() (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x4224A5: main (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==  Block was alloc'd at
+==182522==    at 0x484C133: calloc (vg_replace_malloc.c:1675)
+==182522==    by 0x48C3D9A: UnknownInlinedFun (SDL_malloc.c:5311)
+==182522==    by 0x48C3D9A: SDL_CreateTexture_REAL (SDL_render.c:1285)
+==182522==    by 0x48C7A4E: SDL_CreateTextureFromSurface_REAL (SDL_render.c:1439)
+==182522==    by 0x421AB0: LFont::loadFromRenderedText(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, _TTF_Font*, SDL_Color) (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x421982: LFont::LFont(LWindow*, Scene&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, _TTF_Font*, SDL_Color) (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x422782: __static_initialization_and_destruction_0() (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x4228E1: _GLOBAL__sub_I__ZN8Settings12SCREEN_WIDTHE (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522==    by 0x4E37383: call_init (libc-start.c:145)
+==182522==    by 0x4E37383: __libc_start_main@@GLIBC_2.34 (libc-start.c:347)
+==182522==    by 0x401704: (below main) (in /home/staylor/Downloads/mygame/pd-engine/mygame)
+==182522== 
+==182522== 
+==182522== HEAP SUMMARY:
+==182522==     in use at exit: 176,178 bytes in 2,264 blocks
+==182522==   total heap usage: 99,509 allocs, 97,245 frees, 29,495,857 bytes allocated
+==182522== 
+==182522== LEAK SUMMARY:
+==182522==    definitely lost: 5,375 bytes in 30 blocks
+==182522==    indirectly lost: 3,083 bytes in 20 blocks
+==182522==      possibly lost: 0 bytes in 0 blocks
+==182522==    still reachable: 167,720 bytes in 2,214 blocks
+==182522==         suppressed: 0 bytes in 0 blocks
+==182522== Rerun with --leak-check=full to see details of leaked memory
+==182522== 
+==182522== For lists of detected and suppressed errors, rerun with: -s
+==182522== ERROR SUMMARY: 13 errors from 2 contexts (suppressed: 0 from 0)
