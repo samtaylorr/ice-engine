@@ -7,7 +7,7 @@ void PlayerController::Update()
 {
     std::unique_ptr<SDL_Point> lastPosition = std::make_unique<SDL_Point>(*position);
     Move();
-
+    // this is the worst code i've ever written in my life
     if      (lastPosition->y < position->y) { *currentAnimation=*frontWalk;                     }
     else if (lastPosition->y > position->y) { *currentAnimation=*backWalk;                      }
     else if (lastPosition->x > position->x ){ *currentAnimation=*sideWalk; isFaceLeft = true;   }
@@ -52,6 +52,7 @@ void PlayerController::Move()
 
 PlayerController::PlayerController(Scene &subject, std::shared_ptr<AnimatedSprite2D> sprite) : Component(subject)
 {
+    //nvm i changed my mind, THIS is the worst code I've ever written
     this->sprite = sprite;
     this->frontIdle = std::make_unique<Animation>("Front_Idle", 2,2, 10);        // Set the idle frames and duration
     this->frontWalk = std::make_unique<Animation>("Front_Walk", 0,2, 10);        // Set the walk frames and duration
