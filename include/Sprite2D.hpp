@@ -19,7 +19,7 @@ private:
     LTexture* sprite;
 
 public:
-    Sprite2D(LWindow* window, Scene &subject, const std::string& fileName);
+    Sprite2D(std::shared_ptr<LWindow> window, Scene &subject, const std::string& fileName);
     ~Sprite2D();
 };
 

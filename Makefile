@@ -4,6 +4,7 @@
 # |____*.cpp
 # |/include
 # |____*.hpp
+# etc.
 
 #OBJS specifies which files to compile as part of the project
 OBJS := $(wildcard lib/*.cpp)
@@ -24,21 +25,27 @@ LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 # change "mygame" if you wish to have a seperate name
 OBJ_NAME = mygame
 
-.PHONY: build
-
 #This is the target that compiles our executable
 build:	$(OBJS)
 	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
 
+# this builds our executable and then runs it
 run	:	$(OBJS)
-	make
+	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
 	./$(OBJ_NAME)
 
+# this debugs the program uses a new build with -g
 debug :	$(OBJS)
-	make
 	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -g
 	gdb ./a.out
 	run
 
+# This uses valgrind to detect leaks
 memleaks:	$(OBJS)
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./$(OBJ_NAME) $(OBJ_NAME)
+	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+	valgrind --track-origins=yes --log-file=valgrind-out.txt ./$(OBJ_NAME) $(OBJ_NAME)
+
+# This uses valgrind to detect leaks and shows all leaks (including LVM)
+memleaks_full:	$(OBJS)
+	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out-full.txt ./$(OBJ_NAME) $(OBJ_NAME)

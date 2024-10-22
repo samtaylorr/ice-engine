@@ -16,13 +16,13 @@ private:
     SDL_Rect* currentClip;
     std::unique_ptr<SDL_Point> position;
     void AddFrames(json &frame, std::vector<SDL_Rect>* v);
-    SpriteData* GenerateSpriteData(LWindow *window, Scene &subject, const std::string &filePath, const std::string &jsonPath);
+    SpriteData* GenerateSpriteData(std::shared_ptr<LWindow> window, Scene &subject, const std::string &filePath, const std::string &jsonPath);
     void Update() override;
     SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
 public:
     AnimatedSprite2D(Scene &subject);
-    AnimatedSprite2D(LWindow *window, Scene &subject, const std::string &filePath, const std::string &jsonPath);
+    AnimatedSprite2D(std::shared_ptr<LWindow> window, Scene &subject, const std::string &filePath, const std::string &jsonPath);
     void SetAnim(Animation anim), SetPosition(int x, int y), SetDirection(bool faceLeft);
     SDL_Rect* GetCurrentFrame();
 };

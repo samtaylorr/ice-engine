@@ -1,6 +1,6 @@
 #include "LFont.hpp"
 
-LFont::LFont(LWindow *window, Scene &subject, std::string textureText, TTF_Font* font, SDL_Color textColor) : LTexture(window, subject)
+LFont::LFont(std::shared_ptr<LWindow> window, Scene &subject, std::string textureText, TTF_Font* font, SDL_Color textColor) : LTexture(window, subject)
 {
     //Initialize
     mTexture = NULL;
@@ -13,7 +13,7 @@ LFont::LFont(LWindow *window, Scene &subject, std::string textureText, TTF_Font*
 
 void LFont::SetTransform(SDL_Point transform)
 {
-    this->transform = transform;
+    *this->transform = transform;
 }
 
 LFont::~LFont()
@@ -57,5 +57,5 @@ bool LFont::loadFromRenderedText( std::string textureText, TTF_Font* font, SDL_C
 
 void LFont::Update()
 {
-    render(transform.x,transform.y);
+    render(transform->x,transform->y);
 }

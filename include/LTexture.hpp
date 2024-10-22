@@ -5,6 +5,8 @@
 #include "Component.hpp"
 #include "LWindow.hpp"
 
+#include <memory>
+
 #ifndef LTEXTURE_H_
 #define LTEXTURE_H_
 
@@ -13,8 +15,8 @@ class LTexture : public Component
 {
     public:
         //Allocates memory
-        LTexture(LWindow* window, Scene &subject, const std::string& fileName);
-        LTexture(LWindow* window, Scene &subject);
+        LTexture(std::shared_ptr<LWindow> window, Scene &subject, const std::string& fileName);
+        LTexture(std::shared_ptr<LWindow> window, Scene &subject);
 
         //Deallocates memory
         ~LTexture();

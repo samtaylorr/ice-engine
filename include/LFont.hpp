@@ -1,4 +1,5 @@
 #include "LTexture.hpp"
+#include <memory>
 
 #ifndef LFONT_H_
 #define LFONT_H_
@@ -6,10 +7,10 @@
 class LFont : public LTexture
 {
     private:
-        SDL_Point transform = {0,0};
+        std::unique_ptr<SDL_Point> transform = std::make_unique<SDL_Point>(SDL_Point {0,0});
     public:
         //Allocates memory
-        LFont(LWindow *window, Scene &subject, std::string textureText, TTF_Font* font, SDL_Color textColor);
+        LFont(std::shared_ptr<LWindow> window, Scene &subject, std::string textureText, TTF_Font* font, SDL_Color textColor);
         void SetTransform(SDL_Point transform);
         ~LFont();
 

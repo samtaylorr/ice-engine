@@ -3,7 +3,7 @@
 #include <Input.hpp>
 #include <iostream>
 
-Sprite2D::Sprite2D(LWindow *window, Scene &subject, const std::string &fileName) : Component(subject)
+Sprite2D::Sprite2D(std::shared_ptr<LWindow> window, Scene &subject, const std::string &fileName) : Component(subject)
 {
     sprite = new LTexture(window, subject, fileName);
 }

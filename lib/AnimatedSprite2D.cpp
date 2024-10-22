@@ -13,7 +13,7 @@ void AnimatedSprite2D::AddFrames(json &frame, std::vector<SDL_Rect>* v)
     });
 }
 
-SpriteData *AnimatedSprite2D::GenerateSpriteData(LWindow *window, Scene &subject, const std::string &filePath, const std::string &jsonPath)
+SpriteData *AnimatedSprite2D::GenerateSpriteData(std::shared_ptr<LWindow> window, Scene &subject, const std::string &filePath, const std::string &jsonPath)
 {
     SpriteData* spriteData = new SpriteData;
     std::ifstream f(jsonPath);
@@ -53,7 +53,7 @@ void AnimatedSprite2D::Update()
     else { ++currentDuration; }
 }
 
-AnimatedSprite2D::AnimatedSprite2D(LWindow *window, Scene &subject, const std::string &filePath, const std::string &jsonPath) : Component(subject)
+AnimatedSprite2D::AnimatedSprite2D(std::shared_ptr<LWindow> window, Scene &subject, const std::string &filePath, const std::string &jsonPath) : Component(subject)
 {
     spriteData = GenerateSpriteData(window, subject, filePath, jsonPath);
     frameEnd = spriteData->frames;

@@ -1,7 +1,7 @@
 #include "LTexture.hpp"
 #include <iostream>
 
-LTexture::LTexture(LWindow* window, Scene &subject, const std::string& fileName) : Component(subject)
+LTexture::LTexture(std::shared_ptr<LWindow> window, Scene &subject, const std::string& fileName) : Component(subject)
 {
     //Initialize
     mTexture = NULL;
@@ -12,7 +12,7 @@ LTexture::LTexture(LWindow* window, Scene &subject, const std::string& fileName)
     this->loadFromFile(fileName);
 }
 
-LTexture::LTexture(LWindow* window, Scene &subject) : Component(subject)
+LTexture::LTexture(std::shared_ptr<LWindow> window, Scene &subject) : Component(subject)
 {
     //Initialize
     mTexture = NULL;
@@ -67,7 +67,7 @@ bool LTexture::loadFromFile( std::string path )
     else
     {
         //Color key image
-        //SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
+        SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
         //Create texture from surface pixels
         newTexture = SDL_CreateTextureFromSurface( mRenderer, loadedSurface );
         if( newTexture == NULL )
@@ -109,22 +109,6 @@ void LTexture::render( int x, int y )
     SDL_RenderCopy( mRenderer, mTexture, NULL, &renderQuad );
 }
 
-void LTexture::render(int x, int y, SDL_Rect *clip)
-{
-    //Set rendering space and render to screen
-    SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-
-    //Set clip rendering dimensions
-    if( clip != NULL )
-    {
-        renderQuad.w = clip->w;
-        renderQuad.h = clip->h;
-    }
-
-    //Render to screen
-    SDL_RenderCopy( mRenderer, mTexture, clip, &renderQuad );
-}
-
 void LTexture::render(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE )
 {
     //Set rendering space and render to screen
@@ -132,7 +116,7 @@ void LTexture::render(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, S
 
     //Set clip rendering dimensions
     if( clip != NULL )
-    {
+                    {
         renderQuad.w = clip->w;
         renderQuad.h = clip->h;
     }
