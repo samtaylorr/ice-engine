@@ -2,6 +2,7 @@
 #include <map>
 #include <iostream>
 #include <algorithm>
+#include <memory>
 
 #ifndef _INPUT_H_
 #define _INPUT_H_
@@ -19,22 +20,25 @@ public:
 
 inline void Input::ProcessInput()
 {
-    SDL_Event e;
-
-    while( SDL_PollEvent( &e ) != 0 )
+    // This leaks memory, I don't know, 
+    // I blame SDL2 since I'm using SDL_PollEvent() 
+    // the way they reccomend in their documentation
+    // bleh.
+    SDL_Event event;
+    while( SDL_PollEvent( &event ) != 0 )
     {
-        switch(e.type)
+        switch(event.type)
         {
             case SDL_KEYDOWN:
-                keyboard[e.key.keysym.sym] = true;
+                keyboard[event.key.keysym.sym] = true;
                 break;
             case SDL_KEYUP:
-                keyboard[e.key.keysym.sym] = false;
+                keyboard[event.key.keysym.sym] = false;
                 break;
         }
 
         //User requests quit
-        if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE )
+        if( event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE )
         {
             quit = true;
         }
