@@ -7,7 +7,7 @@ void PlayerController::Update()
 {
     std::unique_ptr<SDL_Point> lastPosition = std::make_unique<SDL_Point>(*position);
     Move();
-
+    // this is the worst code i've ever written in my life
     if      (lastPosition->y < position->y) { *currentAnimation=*frontWalk;                     }
     else if (lastPosition->y > position->y) { *currentAnimation=*backWalk;                      }
     else if (lastPosition->x > position->x ){ *currentAnimation=*sideWalk; isFaceLeft = true;   }
