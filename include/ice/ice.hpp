@@ -1,18 +1,22 @@
-// Utility headers
-#include "Messages.hpp"
-#include "Settings.hpp"
+// External libraries
+#include <vendor/nlohmann/json.hpp>
+
+// Core headers
+#include "core/Messages.hpp"
+#include "core/Component.hpp"
+
+// Rendering headers
+#include "rendering/LWindow.hpp"
+#include "rendering/LTexture.hpp"
+#include "rendering/LFont.hpp"
 
 // Static headers
-#include "Settings.hpp"
-#include "Input.hpp"
+#include "static/Settings.hpp"
+#include "static/Input.hpp"
 
-// Loader headers
-#include "LWindow.hpp"
-#include "LTexture.hpp"
-#include "Component.hpp"
-#include "LFont.hpp"
+// Sprite headers
+#include "sprite/Sprite2D.hpp"
+#include "sprite/AnimatedSprite2D.hpp"
 
-// Feature headers
-#include "Sprite2D.hpp"
-#include "AnimatedSprite2D.hpp"
-#include "PlayerController.hpp"
+// Controller headers
+#include "controllers/PlayerController.hpp"

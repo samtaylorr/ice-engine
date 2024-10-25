@@ -1,9 +1,9 @@
 #ifndef _PLAYER_CONTROLLER_H_
 #define _PLAYER_CONTROLLER_H_
 
-#include "Component.hpp"
-#include "Animation.hpp"
-#include "AnimatedSprite2D.hpp"
+#include "core/Component.hpp"
+#include "sprite/Animation.hpp"
+#include "sprite/AnimatedSprite2D.hpp"
 #include <memory>
 
 enum V_DIRECTIONS

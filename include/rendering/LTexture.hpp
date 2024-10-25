@@ -2,8 +2,8 @@
 #include <SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_ttf.h>
-#include "Component.hpp"
-#include "LWindow.hpp"
+#include "core/Component.hpp"
+#include "rendering/LWindow.hpp"
 
 #include <memory>
 

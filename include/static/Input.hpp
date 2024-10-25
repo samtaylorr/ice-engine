@@ -26,7 +26,7 @@ inline void Input::ProcessInput()
     // bleh.
     SDL_Event event;
     while( SDL_PollEvent( &event ) != 0 )
-    {
+    {   
         switch(event.type)
         {
             case SDL_KEYDOWN:
@@ -41,7 +41,7 @@ inline void Input::ProcessInput()
         if( event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE )
         {
             quit = true;
-        }
+        } 
     }
 }
 

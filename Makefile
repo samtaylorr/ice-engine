@@ -7,7 +7,7 @@
 # etc.
 
 #OBJS specifies which files to compile as part of the project
-OBJS := $(wildcard lib/*.cpp)
+OBJS := $(wildcard lib/*.cpp lib/controllers/*.cpp lib/core/*.cpp lib/rendering/*.cpp lib/sprite/*.cpp lib/static/*.cpp)
 
 #CC specifies which compiler we're using
 CC = g++
@@ -15,7 +15,7 @@ CC = g++
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
 # -Iinclude makes sure the "include/" directory is compiled 
-COMPILER_FLAGS = -w -Iinclude -Iinclude/utils -Iinclude/static -Iinclude/ice -Iinclude/nlohmann -Ivendor/nlohmann
+COMPILER_FLAGS = -w -Iinclude
 
 #LINKER_FLAGS specifies the libraries we're linking against
 # Add -lSDL2_image for SDL2_image, -lSDL2_ttf for SDL_tff etc.

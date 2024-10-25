@@ -1,4 +1,4 @@
-#include "Component.hpp"
+#include "core/Component.hpp"
 
 void Scene::Attach(Component *observer) 
 {

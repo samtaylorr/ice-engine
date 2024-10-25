@@ -1,4 +1,4 @@
-#include "LTexture.hpp"
+#include "rendering/LTexture.hpp"
 #include <iostream>
 
 LTexture::LTexture(std::shared_ptr<LWindow> window, Scene &subject, const std::string& fileName) : Component(subject)

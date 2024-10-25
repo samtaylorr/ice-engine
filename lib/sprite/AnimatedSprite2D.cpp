@@ -1,7 +1,7 @@
-#include "AnimatedSprite2D.hpp"
+#include "sprite/AnimatedSprite2D.hpp"
 #include <fstream>
 #include <iostream>
-#include <Settings.hpp>
+#include <static/Settings.hpp>
 
 void AnimatedSprite2D::AddFrames(json &frame, std::vector<SDL_Rect>* v)
 {

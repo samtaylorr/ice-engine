@@ -1,4 +1,4 @@
-#include <LWindow.hpp>
+#include <rendering/LWindow.hpp>
 
 LWindow::LWindow(const int &SCREEN_WIDTH, const int &SCREEN_HEIGHT)
 {

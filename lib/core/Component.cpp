@@ -1,4 +1,4 @@
-#include "Component.hpp"
+#include "core/Component.hpp"
 
 Component::Component(Scene &subject) : scene_(subject){this->Enable();};
 

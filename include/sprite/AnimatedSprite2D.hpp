@@ -1,7 +1,7 @@
-#include <json.hpp>
+#include <vendor/nlohmann/json.hpp>
 using json = nlohmann::json;
 #include <SDL2/SDL.h>
-#include <Sprite2D.hpp>
+#include <sprite/Sprite2D.hpp>
 #include <memory>
 
 #ifndef ASE_SPRITE_2D_

@@ -1,6 +1,6 @@
-#include "Component.hpp"
-#include "LTexture.hpp"
-#include "Animation.hpp"
+#include "core/Component.hpp"
+#include "rendering/LTexture.hpp"
+#include "sprite/Animation.hpp"
 
 #ifndef SPRITE_2D_H_
 #define SPRITE_2D_H_

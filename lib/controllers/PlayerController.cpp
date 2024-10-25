@@ -1,7 +1,7 @@
-#include "PlayerController.hpp"
+#include "controllers/PlayerController.hpp"
 #include <iostream>
-#include <Input.hpp>
-#include "Settings.hpp"
+#include <static/Input.hpp>
+#include "static/Settings.hpp"
 
 void PlayerController::Update()
 {
