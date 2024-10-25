@@ -7,7 +7,7 @@
 # etc.
 
 #OBJS specifies which files to compile as part of the project
-OBJS := $(wildcard lib/*.cpp lib/controllers/*.cpp lib/core/*.cpp lib/rendering/*.cpp lib/sprite/*.cpp lib/static/*.cpp)
+OBJS := $(shell find lib/ -type f -name '*.cpp')
 
 #CC specifies which compiler we're using
 CC = g++
